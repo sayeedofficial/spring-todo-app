@@ -18,7 +18,7 @@ public class PersonControler {
 	
 	private final PersonService personService;
 	
-	@PostMapping
+	@PostMapping("/addPerson")
 	public PersonResponseDTO savePerson(@RequestBody PersonRequestDTO personRequest) {
 		return personService.addPerson(personRequest);
 	}
