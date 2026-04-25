@@ -6,6 +6,9 @@ import com.sayeed.todo.entity.Person;
 import com.sayeed.todo.repository.PersonRepository;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,5 +44,20 @@ public class PersonService {
                 .email(savedPerson.getEmail())
                 .createdAt(savedPerson.getCreatedAt())
                 .build();
+    }
+
+    public List<PersonResponseDTO> getAllPersons() {
+
+        return personRepository.findAll()
+                .stream()
+                .map(person -> PersonResponseDTO.builder()
+                        .id(person.getId())
+                        .firstName(person.getFirstName())
+                        .lastName(person.getLastName())
+                        .email(person.getEmail())
+                        .createdAt(person.getCreatedAt())
+                        .build()
+                )
+                .toList();
     }
 }
